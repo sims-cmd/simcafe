@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>카페 홈페이지</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #fffef9;
+    }
+
+    /* 인트로 페이지 */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4e7d4;
+    }
+    #intro h1 {
+      font-size: 3em;
+      color: #4b3832;
+      margin-bottom: 20px;
+    }
+    #startBtn {
+      padding: 12px 24px;
+      font-size: 1.2em;
+      background-color: #6b4f4f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    #startBtn:hover {
+      background-color: #4b3832;
+    }
+
+    /* 메뉴 페이지 */
+    #menuPage {
+      display: none;
+      padding: 20px;
+    }
+    h2 {
+      color: #6b4f4f;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .menu-section {
+      width: 90%;
+      max-width: 1000px;
+      margin: 40px auto;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .menu-item {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      background-color: #fff;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+    .menu-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .menu-name {
+      font-size: 1.1em;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    .menu-price {
+      color: #555;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 인트로 페이지 -->
+  <div id="intro">
+    <h1>재환 커피하우스</h1>
+    <button id="startBtn">메뉴 확인하기</button>
+  </div>
+
+  <!-- 메뉴 페이지 -->
+  <div id="menuPage">
+    <h1 style="text-align: center; color: #4b3832;">카페 메뉴</h1>
+
+    <div class="menu-section">
+      <h2>☕ Coffee</h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Americano+Hot" alt="아메리카노(Hot)">
+          <div class="menu-name">아메리카노 (Hot)</div>
+          <div class="menu-price">₩5,000</div>
+        </div>
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Americano+Iced" alt="아메리카노(Iced)">
+          <div class="menu-name">아메리카노 (Iced)</div>
+          <div class="menu-price">₩5,000</div>
+        </div>
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Cafe+Latte" alt="카페라떼">
+          <div class="menu-name">카페라떼</div>
+          <div class="menu-price">₩6,500</div>
+        </div>
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Vanilla+Latte" alt="바닐라라떼">
+          <div class="menu-name">바닐라라떼</div>
+          <div class="menu-price">₩6,500</div>
+        </div>
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Cappuccino" alt="카푸치노">
+          <div class="menu-name">카푸치노</div>
+          <div class="menu-price">₩6,500</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <h2>🍹 Non-Coffee</h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Iced+Tea" alt="아이스티">
+          <div class="menu-name">아이스티</div>
+          <div class="menu-price">₩6,000</div>
+        </div>
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Banana+Juice" alt="바나나 주스">
+          <div class="menu-name">바나나 주스</div>
+          <div class="menu-price">₩6,000</div>
+        </div>
+        <div class="menu-item">
+          <img src="https://via.placeholder.com/250x180?text=Apple+Juice" alt="사과 주스">
+          <div class="menu-name">사과 주스</div>
+          <div class="menu-price">₩6,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 버튼 클릭 시 메뉴 화면 보여주기
+    document.getElementById("startBtn").addEventListener("click", function() {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("menuPage").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
