@@ -24,6 +24,11 @@
       color: #4b3832;
       margin-bottom: 20px;
     }
+    #intro p {
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #4b3832;
+    }
     #startBtn {
       padding: 12px 24px;
       font-size: 1.2em;
@@ -66,6 +71,7 @@
       text-align: center;
       background-color: #fff;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      position: relative;
     }
     .menu-item img {
       width: 100%;
@@ -82,6 +88,32 @@
       color: #555;
       font-size: 0.95em;
     }
+    .menu-check {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      transform: scale(1.5);
+    }
+    #totalPrice {
+      text-align: center;
+      font-size: 1.3em;
+      margin-top: 20px;
+      color: #4b3832;
+    }
+    #calcBtn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #6b4f4f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #calcBtn:hover {
+      background-color: #4b3832;
+    }
   </style>
 </head>
 <body>
@@ -90,6 +122,7 @@
   <div id="intro">
     <h1>재환 커피하우스</h1>
     <button id="startBtn">메뉴 확인하기</button>
+    <p>문의: 010-6374-5450</p>
   </div>
 
   <!-- 메뉴 페이지 -->
@@ -100,27 +133,32 @@
       <h2>☕ Coffee</h2>
       <div class="menu-grid">
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Americano+Hot" alt="아메리카노(Hot)">
+          <input type="checkbox" class="menu-check" data-price="5000">
+          <img src="2036673101_Americano28hot29_360.jpg" alt="아메리카노(Hot)">
           <div class="menu-name">아메리카노 (Hot)</div>
           <div class="menu-price">₩5,000</div>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Americano+Iced" alt="아메리카노(Iced)">
+          <input type="checkbox" class="menu-check" data-price="5000">
+          <img src="다운로드.jpg" alt="아메리카노(Iced)">
           <div class="menu-name">아메리카노 (Iced)</div>
           <div class="menu-price">₩5,000</div>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Cafe+Latte" alt="카페라떼">
+          <input type="checkbox" class="menu-check" data-price="6500">
+          <img src="img.jpg" alt="카페라떼">
           <div class="menu-name">카페라떼</div>
           <div class="menu-price">₩6,500</div>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Vanilla+Latte" alt="바닐라라떼">
+          <input type="checkbox" class="menu-check" data-price="6500">
+          <img src="다운로드 (1).jpg" alt="바닐라라떼">
           <div class="menu-name">바닐라라떼</div>
           <div class="menu-price">₩6,500</div>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Cappuccino" alt="카푸치노">
+          <input type="checkbox" class="menu-check" data-price="6500">
+          <img src="2cdd87a7afab319297a924d4fcc12aac.jpg" alt="카푸치노">
           <div class="menu-name">카푸치노</div>
           <div class="menu-price">₩6,500</div>
         </div>
@@ -131,29 +169,49 @@
       <h2>🍹 Non-Coffee</h2>
       <div class="menu-grid">
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Iced+Tea" alt="아이스티">
+          <input type="checkbox" class="menu-check" data-price="6000">
+          <img src="다운로드 (4).jpg" alt="아이스티">
           <div class="menu-name">아이스티</div>
           <div class="menu-price">₩6,000</div>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Banana+Juice" alt="바나나 주스">
+          <input type="checkbox" class="menu-check" data-price="6000">
+          <img src="다운로드 (2).jpg" alt="바나나 주스">
           <div class="menu-name">바나나 주스</div>
           <div class="menu-price">₩6,000</div>
         </div>
         <div class="menu-item">
-          <img src="https://via.placeholder.com/250x180?text=Apple+Juice" alt="사과 주스">
+          <input type="checkbox" class="menu-check" data-price="6000">
+          <img src="다운로드 (3).jpg" alt="사과 주스">
           <div class="menu-name">사과 주스</div>
           <div class="menu-price">₩6,000</div>
         </div>
       </div>
     </div>
+
+    <!-- 합계 버튼 및 결과 -->
+    <button id="calcBtn">합계 계산하기</button>
+    <p id="totalPrice"></p>
+   
   </div>
 
   <script>
-    // 버튼 클릭 시 메뉴 화면 보여주기
-    document.getElementById("startBtn").addEventListener("click", function() {
+    // 메뉴 보기 버튼 클릭 시 intro 숨기기
+    document.getElementById("startBtn").addEventListener("click", function () {
       document.getElementById("intro").style.display = "none";
       document.getElementById("menuPage").style.display = "block";
+    });
+
+    // 합계 계산
+    document.getElementById("calcBtn").addEventListener("click", function () {
+      const checks = document.querySelectorAll('.menu-check');
+      let total = 0;
+      checks.forEach(check => {
+        if (check.checked) {
+          total += parseInt(check.getAttribute('data-price'));
+        }
+      });
+      document.getElementById('totalPrice').textContent = `총합: ₩${total.toLocaleString()}`;
     });
   </script>
 
